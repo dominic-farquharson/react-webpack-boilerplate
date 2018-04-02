@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -12,10 +12,29 @@ module.exports = {
   devServer: {
     contentBase: './dist',
   },
+  module: {
+    rules: [
+      {
+        test: /\.js$/, // match js
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.jsx$/, // match jsx
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+    ],
+  },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'React Webpack',
+      template: './src/index.html',
     }),
   ],
   devtool: 'inline-source-map',
