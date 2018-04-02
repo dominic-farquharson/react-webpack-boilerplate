@@ -12,6 +12,10 @@ module.exports = {
   devServer: {
     contentBase: './dist',
   },
+  // to allow importing jsx w/o specifying file extension
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
